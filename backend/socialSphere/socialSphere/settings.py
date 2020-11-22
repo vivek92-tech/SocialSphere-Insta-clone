@@ -40,8 +40,11 @@ INSTALLED_APPS = [
 
     # 3rd party app
     'rest_framework',
+    'rest_framework.authtoken',
+
     # local app
     'core',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -87,7 +90,6 @@ DATABASES = {
         'HOST': 'localhost'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
