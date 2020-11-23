@@ -37,6 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 3rd party app
+    'rest_framework',
+    'rest_framework.authtoken',
+
+    # local app
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -118,3 +125,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = '/vol/web/static'
+MEDIA_ROOT = '/vol/web/media'
+
+AUTH_USER_MODEL = 'core.User'
