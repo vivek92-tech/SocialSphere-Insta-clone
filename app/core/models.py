@@ -30,7 +30,7 @@ class UserManager(BaseUserManager):
 
         return user
 
-   
+
 class User(AbstractBaseUser, PermissionsMixin):
     """Custom user model that supports using email instead of username"""
     username = models.CharField(max_length=30, unique=True)
