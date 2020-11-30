@@ -1,4 +1,4 @@
-from rest_framework import authentication, permissions, \
+from rest_framework import permissions, \
     viewsets, generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -12,7 +12,6 @@ class PostViewSet(viewsets.ModelViewSet):
     """Post a new post if authenticated or read only"""
     serializer_class = PostSerializer
     queryset = Post.objects.all()
-    authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (
         IsOwnerOrReadOnly, permissions.IsAuthenticatedOrReadOnly)
 
@@ -24,7 +23,6 @@ class PostViewSet(viewsets.ModelViewSet):
 class AddCommentView(generics.CreateAPIView):
     """Add a new comment and edit or delete existing"""
     serializer_class = CommentSerializer
-    authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def post(self, request, post_id=None):
@@ -42,7 +40,6 @@ class AddCommentView(generics.CreateAPIView):
 class ManageCommentView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentSerializer
     lookup_url_kwarg = 'comment_id'
-    authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (IsOwnerOrPostOwnerOrReadOnly,)
 
     def get_queryset(self):
@@ -51,9 +48,6 @@ class ManageCommentView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class LikeView(APIView):
-    """Toggle like"""
-    authentication_classes = (authentication.TokenAuthentication,)
-    permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, format=None, post_id=None):
         post = Post.objects.get(pk=post_id)
@@ -83,8 +77,6 @@ class GetLikersView(generics.ListAPIView):
 
 
 class UserFeedView(generics.ListAPIView):
-    authentication_classes = (authentication.TokenAuthentication,)
-    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = PostSerializer
 
     def get_queryset(self):
