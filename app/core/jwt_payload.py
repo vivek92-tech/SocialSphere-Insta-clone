@@ -7,7 +7,6 @@ from rest_framework_jwt.settings import api_settings
 
 
 def jwt_payload_handler(user):
-    """Slightly customized jwt payload that include user profile picture"""
 
     username_field = get_username_field()
     username = get_username(user)
